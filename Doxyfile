@@ -1,0 +1,24 @@
+# Doxyfile for Booking System Project
+
+PROJECT_NAME           = "Movie Booking System"
+PROJECT_NUMBER         = 1.0
+PROJECT_BRIEF          = "High-performance lock-free booking with bitmasks"
+OUTPUT_DIRECTORY       = docs
+INPUT                  = include src
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+FILE_PATTERNS          = *.h *.cpp
+EXCLUDE_PATTERNS       = */tests/*
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+GENERATE_TREEVIEW      = YES
+HAVE_DOT               = NO
+UML_LOOK               = YES
+TEMPLATE_RELATIONS     = YES
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO

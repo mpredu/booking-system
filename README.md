@@ -8,14 +8,14 @@ This implementation uses **bitmasks for seat representation** and **lock-free al
 
 ### Prerequisites
 - **CMake** 3.15 or higher
-- **C++20** compatible compiler ( Clang 14+ with libc++, GCC 11+, MSVC 2020+)
+- **C++20** compatible compiler ( Clang 14+ with libc++, GCC 11+, MSVC 2022+)
 - **pthreads** (Linux/macOS) or Windows threading support
 - **Doxygen** (optional, for documentation)
 - **Docker** (optional, for containerized testing)
 #### Compiler Detection (Automated)
 The build scripts automatically detect and use a compatible C++20 compiler:
 ```bash
-./check_compiler.sh  # Standalone compiler check
+./check_compiler.sh(bat)  # Standalone compiler check
 ```
 
 ### Quick Start - One Script Does Everything
@@ -50,6 +50,7 @@ cmake --build .
 
 #### Windows (Visual Studio)
 ```bash
+check_compiler.bat
 mkdir build && cd build
 cmake -G "Visual Studio 17 2022" ..
 cmake --build . --config Release
@@ -474,8 +475,9 @@ movie-booking-system/
 ├── CMakeLists.txt             # Cross-platform build config
 ├── Dockerfile                 # Container definition
 ├── Doxyfile                   # Documentation generator config
-├── check_compiler.sh          # automatically detect and use C++20 compiler
+├── check_compiler.sh          # automatically detect and use C++20 compiler(win)
 ├── do_all.sh                  # Complete build script (Linux/macOS)
+├── check_compiler.bat         # automatically detect and use C++20 compiler(win)
 ├── do_all.bat                 # Complete build script (Windows)
 ├── clean.sh                   # Cleanup script (Linux/macOS)
 ├── clean.bat                  # Cleanup script (Windows)

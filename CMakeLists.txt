@@ -5,6 +5,11 @@ cmake_minimum_required(VERSION 3.15)
 # ============================================
 project(MovieBooking VERSION 1.0 LANGUAGES CXX)
 
+#if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+#    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
+#endif()
+
 # --------------------------------------------
 # General C++ settings
 # --------------------------------------------
@@ -12,6 +17,33 @@ project(MovieBooking VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)  # avoid compiler-specific extensions
+
+# --------------------------------------------
+# Test c++20 barrier support (AFTER setting flags)
+# --------------------------------------------
+set(TEST_FILE "${CMAKE_BINARY_DIR}/test.cpp")
+file(WRITE ${TEST_FILE} "#include <barrier>\nint main() { return 0; }")
+
+# Separate arguments properly
+separate_arguments(CXX_FLAGS_LIST UNIX_COMMAND "${CMAKE_CXX_FLAGS}")
+
+message(STATUS "Testing command: ${CMAKE_CXX_COMPILER} -std=c++20 ${CMAKE_CXX_FLAGS} -c ${TEST_FILE}")
+
+execute_process(
+    COMMAND ${CMAKE_CXX_COMPILER} -std=c++20 ${CXX_FLAGS_LIST} -c ${TEST_FILE}
+    RESULT_VARIABLE RESULT
+    OUTPUT_VARIABLE OUTPUT
+    ERROR_VARIABLE ERROR
+)
+
+if(NOT RESULT EQUAL 0)
+    message(STATUS "Compilation failed!")
+    message(STATUS "Output: ${OUTPUT}")
+    message(STATUS "Error: ${ERROR}")
+    message(FATAL_ERROR "C++20 <barrier> not supported.")
+endif()
+
+message(STATUS "✓ C++20 barrier supported")
 
 # --------------------------------------------
 # Sanitizer Options (cross-platform)

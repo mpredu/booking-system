@@ -17,6 +17,18 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
+REM ====== Check C++20 compiler ======
+echo =========================================================
+echo Checking C++20 support...
+echo =========================================================
+call check_compiler.bat
+if %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo Build aborted - no compatible compiler found
+    exit /b 1
+)
+echo.
+
 REM Check if Docker is available (optional)
 where docker >nul 2>nul
 if %ERRORLEVEL% EQU 0 (

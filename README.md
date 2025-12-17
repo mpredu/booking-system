@@ -475,7 +475,7 @@ movie-booking-system/
 ├── CMakeLists.txt             # Cross-platform build config
 ├── Dockerfile                 # Container definition
 ├── Doxyfile                   # Documentation generator config
-├── check_compiler.sh          # automatically detect and use C++20 compiler(win)
+├── check_compiler.sh          # automatically detect and use C++20 compiler
 ├── do_all.sh                  # Complete build script (Linux/macOS)
 ├── check_compiler.bat         # automatically detect and use C++20 compiler(win)
 ├── do_all.bat                 # Complete build script (Windows)
@@ -570,5 +570,27 @@ do_all.bat       # Windows
 ./clean.sh       # Linux/macOS
 clean.bat        # Windows
 ```
+## 🔧 Troubleshooting
+
+### "C++20 <barrier> not supported"
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install clang-15 libc++-15-dev libc++abi-15-dev
+# or
+sudo apt install g++-11
+```
+
+**macOS:**
+```bash
+brew install llvm
+```
+
+**Windows:**
+- Install Visual Studio 2022 with C++ Desktop Development
+- Or install MinGW-w64 via MSYS2
+
+Then run `./check_compiler.sh` (or `.bat`) to verify.
 
 **Built with modern C++20 | Lock-free algorithms | Production-ready**

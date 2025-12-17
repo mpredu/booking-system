@@ -18,6 +18,13 @@ if ! command -v cmake &> /dev/null; then
     exit 1
 fi
 
+# Check C++20 compiler
+echo "========================================================="
+echo "Checking C++20 support..."
+echo "========================================================="
+source ./check_compiler.sh
+echo ""
+
 # Check if Docker is available (optional)
 if command -v docker &> /dev/null; then
     DOCKER_AVAILABLE=true

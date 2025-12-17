@@ -8,10 +8,15 @@ This implementation uses **bitmasks for seat representation** and **lock-free al
 
 ### Prerequisites
 - **CMake** 3.15 or higher
-- **C++20** compatible compiler (GCC 10+, Clang 11+, MSVC 2019+)
+- **C++20** compatible compiler ( Clang 14+ with libc++, GCC 11+, MSVC 2020+)
 - **pthreads** (Linux/macOS) or Windows threading support
 - **Doxygen** (optional, for documentation)
 - **Docker** (optional, for containerized testing)
+#### Compiler Detection (Automated)
+The build scripts automatically detect and use a compatible C++20 compiler:
+```bash
+./check_compiler.sh  # Standalone compiler check
+```
 
 ### Quick Start - One Script Does Everything
 
@@ -37,6 +42,7 @@ This script will:
 
 #### Linux/macOS
 ```bash
+source ./check_compiler.sh
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
@@ -342,7 +348,7 @@ std::memory_order_release  // Store: Make writes visible to others
 | **Memory for 100k combos** | ~390 KB | Verified in scalability test |
 | **Blocking** | Zero | Pure lock-free |
 | **Scalability** | Linear | Scales with CPU cores |
-| **Fairness** | ~?70-80?% | Exponential backoff |
+| **Fairness** | Good | Exponential backoff |
 | **Max dataset tested** | 100,000 combos | Scalability test |
 
 ### Mutex-Based (Comparison Baseline)
@@ -468,6 +474,7 @@ movie-booking-system/
 ├── CMakeLists.txt             # Cross-platform build config
 ├── Dockerfile                 # Container definition
 ├── Doxyfile                   # Documentation generator config
+├── check_compiler.sh          # automatically detect and use C++20 compiler
 ├── do_all.sh                  # Complete build script (Linux/macOS)
 ├── do_all.bat                 # Complete build script (Windows)
 ├── clean.sh                   # Cleanup script (Linux/macOS)
